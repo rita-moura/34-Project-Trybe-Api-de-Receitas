@@ -26,6 +26,10 @@ public class RecipesController : ControllerBase
     public IActionResult Get()
     {
         var recipes = this._service.GetRecipes();
+        if(recipes == null)
+        {
+            return NotFound();
+        }
         return Ok(recipes);
     }
 
