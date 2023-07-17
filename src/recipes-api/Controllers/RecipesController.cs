@@ -25,7 +25,8 @@ public class RecipesController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        throw new NotImplementedException();    
+        var recipes = this._service.GetRecipes();
+        return Ok(recipes);
     }
 
     // 2 - Sua aplicação deve ter o endpoint GET /recipe/:name
