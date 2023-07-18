@@ -37,7 +37,7 @@ public class RecipesController : ControllerBase
     [HttpGet("{name}", Name = "GetRecipe")]
     public IActionResult Get(string name)
     {           
-        if(_service.GetRecipe(name) == null)
+        if(!_service.RecipeExists(name))
         {
             return NotFound();
         }
@@ -66,6 +66,12 @@ public class RecipesController : ControllerBase
     [HttpDelete("{name}")]
     public IActionResult Delete(string name)
     {
-        throw new NotImplementedException();
+        if(!_service.RecipeExists(name))
+        {
+            return NotFound();
+        }
+
+        _service.DeleteRecipe(name);
+        return NoContent();
     }    
 }
