@@ -25,32 +25,34 @@ public class RecipesController : ControllerBase
     [HttpGet]
     public IActionResult Get()
     {
-        var recipes = this._service.GetRecipes();
-        if(recipes == null)
+        if(_service.GetRecipes() == null)
         {
             return NotFound();
         }
-        return Ok(recipes);
+        return Ok(_service.GetRecipes());
     }
 
     // 2 - Sua aplicação deve ter o endpoint GET /recipe/:name
     //Read
     [HttpGet("{name}", Name = "GetRecipe")]
     public IActionResult Get(string name)
-    {                
-        var recipeByName = this._service.GetRecipe(name);
-        if(recipeByName == null)
+    {           
+        if(_service.GetRecipe(name) == null)
         {
             return NotFound();
         }
-        return Ok(recipeByName);
+        return Ok(_service.GetRecipe(name));
     }
 
     // 3 - Sua aplicação deve ter o endpoint POST /recipe
     [HttpPost]
     public IActionResult Create([FromBody]Recipe recipe)
     {
-        throw new NotImplementedException();
+        {
+            _service.AddRecipe(recipe);
+
+            return CreatedAtRoute("GetRecipe", new { name = recipe.Name }, recipe);
+        }
     }
 
     // 4 - Sua aplicação deve ter o endpoint PUT /recipe
