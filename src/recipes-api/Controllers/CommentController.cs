@@ -26,13 +26,13 @@ public class CommentController : ControllerBase
     {
          _service.AddComment(comment);
 
-        return CreatedAtRoute("GetComment", new { comment = comment.CommentText }, comment);
+        return CreatedAtRoute("GetComment", new { name = comment.CommentText }, comment);
     }
 
     // 11 - Sua aplicação deve ter o endpoint GET /comment/:recipeName
     [HttpGet("{name}", Name = "GetComment")]
     public IActionResult Get(string name)
     {                
-        throw new NotImplementedException();                   
+        throw new NotImplementedException();                  
     }
 }
